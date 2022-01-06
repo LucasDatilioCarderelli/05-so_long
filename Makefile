@@ -3,53 +3,75 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
+#    By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/12/30 20:23:10 by coder             #+#    #+#              #
-#    Updated: 2021/12/31 01:35:18 by coder            ###   ########.fr        #
+#    Created: 2022/01/05 14:21:14 by ldatilio          #+#    #+#              #
+#    Updated: 2022/01/05 21:27:19 by ldatilio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	so_long
+NAME			:=	so_long
+NAME_BONUS		:=	so_long_bonus
 
-SRCS		=	so_long.c
+CC				:=	gcc
 
-OBJS		=	${SRCS:%.c=%.o}
+CFLAGS			:=	-Wall -Werror -Wextra
+LIB				:=	-lbsd -lmlx -lXext -lX11 -lm -lz
 
-CC 			=	gcc
+LIBFT			:=	./libft/libft.a
 
-LIB			=	-lbsd -lmlx -lXext -lX11 -lm -lz
+FOLDER			:=	./src/
+FOLDER_BONUS	:=	./src_bonus/
 
-LIBFT		=	./libs/libft/libft.a
+SRC		:=		$(addprefix $(FOLDER),	\
+				verify_error.c			\
+				exit_free.c				\
+				move.c					\
+				render_game.c			\
+				so_long.c				\
+				verify_map.c			\
+				)
+SRC_BONUS =		$(addprefix $(FOLDER_BONUS),	\
+				so_long.c						\
+				start.c							\
+				verify_map.c					\
+				render_game.c					\
+				move.c							\
+				exit.c							\
+				so_long_utils.c					\
+				free_solong.c					\
+				error.c							\
+				load_hero.c						\
+				)
 
-# FLAGS 		=	-Wall -Werror -Wextra
+OBJS		:=	${SRC:%.c=%.o}
+OBJS_BONUS	:=	${SRC_BONUS:.c=.o}
 
 .c.o:
-			$(CC) $(FLAGS) -lmlx -c $< -o $(<:.c=.o)
+				$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-all:		$(NAME)
+all:			$(NAME)
+bonus: 			$(NAME_BONUS)
 
-$(NAME): 	$(OBJS) $(LIBFT) $(MINILIBX)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(LIB) $(LIBFT)
+$(NAME): 		$(LIBFT) $(OBJS)
+				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB) $(LIBFT)
+
+$(NAME_BONUS):	$(LIBFT) $(OBJS_BONUS)
+				$(CC) $(CFLAGS) -o $(NAME_BONUS) $(OBJS_BONUS) $(LIB) $(LIBFT)
 
 $(LIBFT):
-			make bonus -C ./libs/libft
+				make bonus -C ./libft
 
-$(MINILIBX):
-			cd ./libs/minilibx && ./configure && cd ../../
-			
 clean:
-			rm -f $(OBJS)
-			make clean -C ./libs/libft
+				rm -f $(OBJS) $(OBJS_BONUS)
+				make clean -C ./libft
 
-fclean: 	clean
-			rm -f $(NAME)
-			make fclean -C ./libs/libft
+fclean:			clean
+				rm -f $(NAME) $(NAME_BONUS)
+				make fclean -C ./libft
 
-re: 		fclean all
+re:				fclean all
 
-.PHONY: 	all clean fclean re bonus rebonus
+rebonus:		fclean bonus
 
-# ---------------------------------------------------------------------------
-
-# MINILIBX:=	.libs/minilibx/libmlx_Linux.a
+.PHONY: 		all, clean, fclean, re, bonus, rebonus
