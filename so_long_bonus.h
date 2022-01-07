@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjose-ye <coder@student.42.fr>             +#+  +:+       +#+        */
+/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:41:10 by mjose-ye          #+#    #+#             */
-/*   Updated: 2021/12/10 16:30:14 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/07 18:21:41 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,44 +19,60 @@
 # include <fcntl.h>
 # include "./libft/libft.h"
 
-# define HERO "./assets/sprites/knight.xpm"
+# define KEY_ESC	65307
+# define KEY_Q		113
 
-# define KEY_ESC			65307
-# define KEY_Q			113
-# define KEY_W			119
-# define KEY_A			97
-# define KEY_S			115
-# define KEY_D			100
+# define KEY_W		119
+# define KEY_A		97
+# define KEY_S		115
+# define KEY_D		100
 
-typedef struct s_vector
+# define KEY_LEFT	65361
+# define KEY_UP		65362
+# define KEY_RIGHT	65363
+# define KEY_DOWN	65364
+
+# define FLOOR		"./assets/sprites/floor.xpm"
+# define WALL		"./assets/sprites/wall.xpm"
+# define COIN		"./assets/sprites/coins.xpm"
+# define EXIT		"./assets/sprites/exit.xpm"
+# define EXIT_OPEN	"./assets/sprites/exit_open.xpm"
+# define SLIME		"./assets/sprites/slime.xpm"
+# define HERO_R		"./assets/sprites/knight_right.xpm"
+# define HERO_L		"./assets/sprites/knight_left.xpm"
+# define HERO_U		"./assets/sprites/knight_up.xpm"
+# define HERO_D		"./assets/sprites/knight_down.xpm"
+
+typedef enum e_bool
+{
+	TRUE	=	1,
+	FALSE	=	0
+}				t_bool;
+
+typedef struct s_position
 {
 	int	x;
 	int	y;
-}		t_vector;
+}		t_position;
 
 typedef struct s_img
 {
 	void		*img;
-	t_vector	posimg;
+	t_position	posimg;
 	int			width;
 	int			height;
 }				t_img;
 
 typedef struct s_map
 {
-	char		*line;
 	int			count_column;
-	char		*temp;
 	int			count_line;
-	int			column;
-	int			collect;
+	int			collectible;
 	int			exit;
-	t_vector	player;
-	int			end_game;
-	char		**map;
-	int			validate;
 	int			cont_player;
 	int			player_side;
+	char		**map;
+	t_position	player;
 }		t_map;
 
 typedef struct s_vars
@@ -82,28 +98,35 @@ typedef struct s_game
 	t_img	enemy;
 }		t_game;
 
-int		exit_click(t_game *game);
-int		key_press(int keycode, t_game *game);
-void	move_hero(int keycode, t_game *game, int line, int col);
-int		render_game(t_game *game);
-int		start_game(t_game *game);
-void	start_player(t_game *game);
-void	render_map(t_game *game);
+void	init_vars(t_game *game);
+int		init_game(t_game *game);
+void	load_hero(t_game *game);
+
+void	read_map(char *argv, t_game *game);
 void	validate_map(t_game *game);
 void	count_column(t_game *game);
-void	verify_map(char *argv, t_game *game);
+void	count_chars(int x, int y, t_game *game);
+
+void	verify_argc(int argc);
+void	verify_ext(char *map_name);
+void	verify_wall(t_game *game);
+void	verify_count_chars(t_game *game);
+void	verify_issquare(t_game *game);
+
+int		key_press(int keycode, t_game *game);
+void	move_hero(t_game *game, int line, int col);
+int		check_move(t_game *game, int line, int col);
+void	print_victory(t_game *game);
+void	print_gameover(t_game *game);
+
+int		render_game(t_game *game);
+void	render_map(t_game *game);
+void	render_exit(t_game *game, int x, int y);
 void	second_plain(t_game *game);
-char	*ft_strjoin_free(char *s1, char const *s2);
-void	free_vector(t_game *game);
+
+void	exit_error(char *s);
+int		exit_click(t_game *game);
+void	free_map(t_game *game);
 void	free_images(t_game *game);
-void	error(char *s, int n);
-void	error_cep(t_game *game);
-int		validate_ber(char *s, char *ext);
-void	verify_arg(int argc);
-void	init_vars(t_game *game);
-void	print_exit(t_game *game, int x, int y);
-void	load_hero(t_game *game);
-void	error_wall(t_game *game);
-void	error_square(t_game *game);
 
 #endif

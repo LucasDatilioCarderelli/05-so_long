@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjose-ye <coder@student.42.fr>             +#+  +:+       +#+        */
+/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:31:19 by mjose-ye          #+#    #+#             */
-/*   Updated: 2021/12/10 16:42:11 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/07 18:24:13 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
+
+int	render_game(t_game *game)
+{
+	char	*s;
+
+	render_map(game);
+	if (game->map.player_side == KEY_D || game->map.player_side == KEY_RIGHT)
+		mlx_put_image_to_window(
+			game->vars.mlx, game->vars.win, game->hero_right.img,
+			game->map.player.x * 30, game->map.player.y * 30);
+	if (game->map.player_side == KEY_A || game->map.player_side == KEY_LEFT)
+		mlx_put_image_to_window(
+			game->vars.mlx, game->vars.win, game->hero_left.img,
+			game->map.player.x * 30, game->map.player.y * 30);
+	if (game->map.player_side == KEY_W || game->map.player_side == KEY_UP)
+		mlx_put_image_to_window(
+			game->vars.mlx, game->vars.win, game->hero_up.img,
+			game->map.player.x * 30, game->map.player.y * 30);
+	if (game->map.player_side == KEY_S || game->map.player_side == KEY_DOWN)
+		mlx_put_image_to_window(
+			game->vars.mlx, game->vars.win, game->hero_down.img,
+			game->map.player.x * 30, game->map.player.y * 30);
+	s = ft_itoa(game->count_move);
+	mlx_string_put(game->vars.mlx, game->vars.win, 5, 25, 0xFFFFFF, "MOVES: ");
+	mlx_string_put(game->vars.mlx, game->vars.win, 75, 25, 0xFFFFFF, s);
+	free(s);
+	return (0);
+}
 
 void	render_map(t_game *game)
 {
@@ -33,33 +61,40 @@ void	render_map(t_game *game)
 		}
 		y++;
 	}
-	if (game->count_move == 0)
-	{
-		start_player(game);
-	}
 	second_plain(game);
 }
 
-int	render_game(t_game *game)
+void	second_plain(t_game *game)
 {
-	char	*s;
+	int	x;
+	int	y;
 
-	render_map(game);
-	if (game->map.player_side == KEY_D)
+	y = 0;
+	while (game->map.map[y])
+	{
+		x = 0;
+		while (game->map.map[y][x])
+		{
+			if (game->map.map[y][x] == 'C')
+				mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
+				game->coins.img, x * 30, y * 30);
+			if (game->map.map[y][x] == 'E')
+				render_exit(game, x, y);
+			if (game->map.map[y][x] == 'V')
+				mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
+				game->enemy.img, x * 30, y * 30);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	render_exit(t_game *game, int x, int y)
+{
+	if (game->map.collectible == 0)
 		mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
-		game->hero_right.img, game->map.player.x * 30, game->map.player.y * 30);
-	if (game->map.player_side == KEY_A)
+		game->exit_open.img, x * 30, y * 30);
+	else
 		mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
-		game->hero_left.img, game->map.player.x * 30, game->map.player.y * 30);
-	if (game->map.player_side == KEY_W)
-		mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
-		game->hero_up.img, game->map.player.x * 30, game->map.player.y * 30);
-	if (game->map.player_side == KEY_S)
-		mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
-		game->hero_down.img, game->map.player.x * 30, game->map.player.y * 30);
-	s = ft_itoa(game->count_move);
-	mlx_string_put(game->vars.mlx, game->vars.win, 175, 10, 0xFFFFFF, s);
-	mlx_string_put(game->vars.mlx, game->vars.win, 140, 10, 0xFFFFFF, "Move: ");
-	free(s);
-	return (0);
+		game->exit_close.img, x * 30, y * 30);
 }

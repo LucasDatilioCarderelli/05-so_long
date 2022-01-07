@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:19:28 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/01/06 21:29:05 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/07 14:39:29 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	main(int argc, char **argv)
 	init_vars(&game);
 	read_map(argv[1], &game);
 	init_game(&game);
-	mlx_hook(game.vars.win, 3, 1L << 1, key_press, &game);
 	mlx_hook(game.vars.win, 12, 1L << 15, render_game, &game);
+	mlx_hook(game.vars.win, 3, 1L << 1, key_press, &game);
 	mlx_hook(game.vars.win, 17, 0L, exit_click, &game);
 	mlx_loop(game.vars.mlx);
 	return (0);

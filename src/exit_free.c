@@ -6,25 +6,26 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:13:34 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/01/06 19:06:50 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/07 20:44:58 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 void	exit_error(char *s)
-{
-	printf("\033[0;31mError:\n%s\n\033[0m", s);
+{	
+	printf("\033[0;31m");
+	printf("Error:\n%s", s);
+	printf("\n\033[0m");
 	exit(EXIT_FAILURE);
 }
 
 int	exit_click(t_game *game)
 {
-	printf("move %d\n", game->count_move);
+	printf("Moves: %d\n", game->count_move);
 	free_map(game);
 	free_images(game);
 	exit(1);
-	return (0);
 }
 
 void	free_map(t_game *game)

@@ -3,49 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjose-ye <coder@student.42.fr>             +#+  +:+       +#+        */
+/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:25:49 by mjose-ye          #+#    #+#             */
-/*   Updated: 2021/12/10 16:29:50 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/06 23:13:03 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
 
-void	error(char *s, int n)
-{
-	printf("ERROR: %s\n", s);
-	exit(n);
-}
-
-void	error_cep(t_game *game)
-{
-	if (game->map.cont_player != 1)
-	{
-		free_vector(game);
-		error("Invalid player quantity", EXIT_FAILURE);
-	}
-	if (game->map.exit < 1)
-	{
-		free_vector(game);
-		error("There are no exit", EXIT_FAILURE);
-	}
-	if (game->map.collect < 1)
-	{
-		free_vector(game);
-		error("There are no collect", EXIT_FAILURE);
-	}
-}
-
-void	verify_arg(int argc)
+void	verify_argc(int argc)
 {
 	if (argc > 2)
-		error("Too many arguments", EXIT_FAILURE);
+		exit_error("Too many arguments");
 	if (argc < 2)
-		error("Have few arguments", EXIT_FAILURE);
+		exit_error("Mapfile is missing");
 }
 
-void	error_wall(t_game *game)
+void	verify_ext(char *map_name)
+{
+	size_t	len;
+
+	len = ft_strlen(map_name);
+	if (map_name[len - 4] != '.' || map_name[len - 3] != 'b' || \
+		map_name[len - 2] != 'e' || map_name[len - 1] != 'r')
+		exit_error("File Extension is wrong");
+}
+
+void	verify_wall(t_game *game)
 {
 	int	x;
 	int	y;
@@ -59,14 +44,14 @@ void	error_wall(t_game *game)
 			if (game->map.map[0][x] != '1' || \
 			game->map.map[game->map.count_line - 1][x] != '1')
 			{
-				free_vector(game);
-				error("Missing Wall", EXIT_FAILURE);
+				free_map(game);
+				exit_error("A horizontal Wall is missing");
 			}
 			if (game->map.map[y][0] != '1' || \
 			game->map.map[y][game->map.count_column - 1] != '1')
 			{
-				free_vector(game);
-				error("Missing Wall", EXIT_FAILURE);
+				free_map(game);
+				exit_error("A vertical Wall is missing");
 			}
 			x++;
 		}
@@ -74,11 +59,30 @@ void	error_wall(t_game *game)
 	}
 }
 
-void	error_square(t_game *game)
+void	verify_count_chars(t_game *game)
+{
+	if (game->map.cont_player != 1)
+	{
+		free_map(game);
+		exit_error("Invalid player quantity");
+	}
+	if (game->map.exit < 1)
+	{
+		free_map(game);
+		exit_error("There are no exit");
+	}
+	if (game->map.collectible < 1)
+	{
+		free_map(game);
+		exit_error("There are no collectibles");
+	}
+}
+
+void	verify_issquare(t_game *game)
 {
 	if (game->map.count_column == game->map.count_line)
 	{
-		free_vector(game);
-		error("square map", EXIT_FAILURE);
+		free_map(game);
+		exit_error("Map is a square");
 	}
 }

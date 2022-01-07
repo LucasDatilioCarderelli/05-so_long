@@ -6,7 +6,7 @@
 #    By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/05 14:21:14 by ldatilio          #+#    #+#              #
-#    Updated: 2022/01/05 21:27:19 by ldatilio         ###   ########.fr        #
+#    Updated: 2022/01/07 12:56:31 by ldatilio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,28 +20,25 @@ LIB				:=	-lbsd -lmlx -lXext -lX11 -lm -lz
 
 LIBFT			:=	./libft/libft.a
 
-FOLDER			:=	./src/
-FOLDER_BONUS	:=	./src_bonus/
+DIR			:=	./src/
+DIR_BONUS	:=	./src_bonus/
 
-SRC		:=		$(addprefix $(FOLDER),	\
+SRC		:=		$(addprefix $(DIR),	\
+				verify_error.c		\
+				exit_free.c			\
+				move.c				\
+				render_game.c		\
+				so_long.c			\
+				read_map.c			\
+				)
+SRC_BONUS =		$(addprefix $(DIR_BONUS),\
 				verify_error.c			\
 				exit_free.c				\
 				move.c					\
 				render_game.c			\
 				so_long.c				\
-				verify_map.c			\
-				)
-SRC_BONUS =		$(addprefix $(FOLDER_BONUS),	\
-				so_long.c						\
-				start.c							\
-				verify_map.c					\
-				render_game.c					\
-				move.c							\
-				exit.c							\
-				so_long_utils.c					\
-				free_solong.c					\
-				error.c							\
-				load_hero.c						\
+				read_map.c				\
+				load_hero.c				\
 				)
 
 OBJS		:=	${SRC:%.c=%.o}

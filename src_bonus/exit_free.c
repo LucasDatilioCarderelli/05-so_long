@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_solong.c                                      :+:      :+:    :+:   */
+/*   exit_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjose-ye <coder@student.42.fr>             +#+  +:+       +#+        */
+/*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:26:37 by mjose-ye          #+#    #+#             */
-/*   Updated: 2021/12/08 19:41:13 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/07 18:27:12 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
 
-void	free_vector(t_game *game)
+void	exit_error(char *s)
+{
+	printf("\033[0;31m");
+	printf("Error:\n%s", s);
+	printf("\n\033[0m");
+	exit(EXIT_FAILURE);
+}
+
+int	exit_click(t_game *game)
+{
+	printf("Moves: %d\n", game->count_move);
+	free_map(game);
+	free_images(game);
+	exit(1);
+}
+
+void	free_map(t_game *game)
 {
 	int	i;
 
