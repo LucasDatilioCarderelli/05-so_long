@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:41:10 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/07 18:21:41 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/08 16:51:10 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,33 +70,34 @@ typedef struct s_map
 	int			collectible;
 	int			exit;
 	int			cont_player;
+	int			cont_killer;
 	int			player_side;
 	char		**map;
 	t_position	player;
-}		t_map;
+}				t_map;
 
 typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
-}		t_vars;
+}			t_vars;
 
 typedef struct s_game
 {
-	int		count_move;
-	t_vars	vars;
-	t_img	hero_right;
-	t_img	hero_left;
-	t_img	hero_up;
-	t_img	hero_down;
-	t_img	floor;
-	t_img	wall;
-	t_img	exit_close;
-	t_img	exit_open;
-	t_img	coins;
-	t_map	map;
-	t_img	enemy;
-}		t_game;
+	int			count_move;
+	t_vars		vars;
+	t_img		hero_right;
+	t_img		hero_left;
+	t_img		hero_up;
+	t_img		hero_down;
+	t_img		floor;
+	t_img		wall;
+	t_img		exit_close;
+	t_img		exit_open;
+	t_img		coins;
+	t_map		map;
+	t_img		enemy;
+}				t_game;
 
 void	init_vars(t_game *game);
 int		init_game(t_game *game);
@@ -128,5 +129,7 @@ void	exit_error(char *s);
 int		exit_click(t_game *game);
 void	free_map(t_game *game);
 void	free_images(t_game *game);
+
+void	move_enemy(t_game *game);
 
 #endif

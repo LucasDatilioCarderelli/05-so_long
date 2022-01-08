@@ -6,7 +6,7 @@
 #    By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/05 14:21:14 by ldatilio          #+#    #+#              #
-#    Updated: 2022/01/07 12:56:31 by ldatilio         ###   ########.fr        #
+#    Updated: 2022/01/08 20:28:06 by ldatilio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,29 +20,29 @@ LIB				:=	-lbsd -lmlx -lXext -lX11 -lm -lz
 
 LIBFT			:=	./libft/libft.a
 
-DIR			:=	./src/
-DIR_BONUS	:=	./src_bonus/
+DIR				:=	./src/
+DIR_BONUS		:=	./src_bonus/
 
 SRC		:=		$(addprefix $(DIR),	\
-				verify_error.c		\
-				exit_free.c			\
-				move.c				\
-				render_game.c		\
 				so_long.c			\
 				read_map.c			\
+				render_game.c		\
+				exit_free.c			\
+				verify_error.c		\
+				player_move.c		\
 				)
 SRC_BONUS =		$(addprefix $(DIR_BONUS),\
-				verify_error.c			\
-				exit_free.c				\
-				move.c					\
-				render_game.c			\
 				so_long.c				\
 				read_map.c				\
-				load_hero.c				\
+				render_game.c			\
+				exit_free.c				\
+				verify_error.c			\
+				player_move.c			\
+				enemy_move.c			\
 				)
 
-OBJS		:=	${SRC:%.c=%.o}
-OBJS_BONUS	:=	${SRC_BONUS:.c=.o}
+OBJS			:=	${SRC:%.c=%.o}
+OBJS_BONUS		:=	${SRC_BONUS:.c=.o}
 
 .c.o:
 				$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
