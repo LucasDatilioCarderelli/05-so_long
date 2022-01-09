@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:26:37 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/07 18:27:12 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/09 20:05:20 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	free_images(t_game *game)
 	mlx_destroy_image(game->vars.mlx, game->hero_up.img);
 	mlx_destroy_image(game->vars.mlx, game->hero_down.img);
 	mlx_destroy_image(game->vars.mlx, game->enemy.img);
+	mlx_destroy_image(game->vars.mlx, game->enemy_i.img);
 	mlx_destroy_window(game->vars.mlx, game->vars.win);
 	mlx_destroy_display(game->vars.mlx);
 	free(game->vars.mlx);

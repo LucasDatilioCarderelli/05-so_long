@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:41:10 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/08 16:51:10 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/09 20:23:26 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@
 # define COIN		"./assets/sprites/coins.xpm"
 # define EXIT		"./assets/sprites/exit.xpm"
 # define EXIT_OPEN	"./assets/sprites/exit_open.xpm"
-# define SLIME		"./assets/sprites/slime.xpm"
 # define HERO_R		"./assets/sprites/knight_right.xpm"
 # define HERO_L		"./assets/sprites/knight_left.xpm"
 # define HERO_U		"./assets/sprites/knight_up.xpm"
 # define HERO_D		"./assets/sprites/knight_down.xpm"
+# define SLIME		"./assets/sprites/slime.xpm"
+# define SLIME_I	"./assets/sprites/slime_i.xpm"
 
 typedef enum e_bool
 {
@@ -85,18 +86,20 @@ typedef struct s_vars
 typedef struct s_game
 {
 	int			count_move;
+	int			framecount;
 	t_vars		vars;
-	t_img		hero_right;
-	t_img		hero_left;
-	t_img		hero_up;
-	t_img		hero_down;
+	t_map		map;
 	t_img		floor;
 	t_img		wall;
 	t_img		exit_close;
 	t_img		exit_open;
 	t_img		coins;
-	t_map		map;
+	t_img		hero_right;
+	t_img		hero_left;
+	t_img		hero_up;
+	t_img		hero_down;
 	t_img		enemy;
+	t_img		enemy_i;
 }				t_game;
 
 void	init_vars(t_game *game);
@@ -122,8 +125,9 @@ void	print_gameover(t_game *game);
 
 int		render_game(t_game *game);
 void	render_map(t_game *game);
+void	render_character(t_game *game, int x, int y);
 void	render_exit(t_game *game, int x, int y);
-void	second_plain(t_game *game);
+void	render_enemy(t_game *game, int x, int y);
 
 void	exit_error(char *s);
 int		exit_click(t_game *game);
@@ -131,5 +135,7 @@ void	free_map(t_game *game);
 void	free_images(t_game *game);
 
 void	move_enemy(t_game *game);
+int		ai_enemy_move(t_game *game, int x, int y);
+int		check_enemy(char future_position);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:31:19 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/07 18:24:13 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/09 20:18:23 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,50 +51,54 @@ void	render_map(t_game *game)
 		x = 0;
 		while (game->map.map[y][x])
 		{
-			if (game->map.map[y][x] == '1')
-				mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
-				game->wall.img, x * 30, y * 30);
-			else
-				mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
-				game->floor.img, x * 30, y * 30);
+			render_character(game, x, y);
 			x++;
 		}
 		y++;
 	}
-	second_plain(game);
 }
 
-void	second_plain(t_game *game)
+void	render_character(t_game *game, int x, int y)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	while (game->map.map[y])
-	{
-		x = 0;
-		while (game->map.map[y][x])
-		{
-			if (game->map.map[y][x] == 'C')
-				mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
-				game->coins.img, x * 30, y * 30);
-			if (game->map.map[y][x] == 'E')
-				render_exit(game, x, y);
-			if (game->map.map[y][x] == 'V')
-				mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
-				game->enemy.img, x * 30, y * 30);
-			x++;
-		}
-		y++;
-	}
+	if (game->map.map[y][x] == '0')
+		mlx_put_image_to_window(
+			game->vars.mlx, game->vars.win,
+			game->floor.img, x * 30, y * 30);
+	if (game->map.map[y][x] == '1')
+		mlx_put_image_to_window(
+			game->vars.mlx, game->vars.win,
+			game->wall.img, x * 30, y * 30);
+	if (game->map.map[y][x] == 'C')
+		mlx_put_image_to_window(
+			game->vars.mlx, game->vars.win,
+			game->coins.img, x * 30, y * 30);
+	if (game->map.map[y][x] == 'E')
+		render_exit(game, x, y);
+	if (game->map.map[y][x] == 'V')
+		render_enemy(game, x, y);
 }
 
 void	render_exit(t_game *game, int x, int y)
 {
 	if (game->map.collectible == 0)
-		mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
-		game->exit_open.img, x * 30, y * 30);
+		mlx_put_image_to_window(
+			game->vars.mlx, game->vars.win,
+			game->exit_open.img, x * 30, y * 30);
 	else
-		mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
-		game->exit_close.img, x * 30, y * 30);
+		mlx_put_image_to_window(
+			game->vars.mlx, game->vars.win,
+			game->exit_close.img, x * 30, y * 30);
+}
+
+void	render_enemy(t_game *game, int x, int y)
+{
+	if (game->framecount % 2 == 0)
+		mlx_put_image_to_window(
+			game->vars.mlx, game->vars.win,
+			game->enemy.img, x * 30, y * 30);
+	else
+		mlx_put_image_to_window(
+			game->vars.mlx, game->vars.win,
+			game->enemy_i.img, x * 30, y * 30);
+	game->framecount += 1;
 }

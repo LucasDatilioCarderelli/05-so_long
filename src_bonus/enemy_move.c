@@ -6,14 +6,11 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:37:59 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/09 00:17:13 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/09 20:23:13 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
-
-int	ai_enemy_move(t_game *game, int x, int y);
-int	check_enemy(char future_position);
 
 void	move_enemy(t_game *game)
 {
