@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:26:58 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/09 20:49:28 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/18 21:57:59 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,27 @@ int	key_press(int keycode, t_game *game)
 	int	line;
 	int	col;
 
-	game->map.player_side = keycode;
 	line = game->map.player.y;
 	col = game->map.player.x;
 	if (keycode == KEY_W || keycode == KEY_UP)
-		move_hero(game, --line, col);
+		move_hero(game, --line, col, keycode);
 	if (keycode == KEY_A || keycode == KEY_LEFT)
-		move_hero(game, line, --col);
+		move_hero(game, line, --col, keycode);
 	if (keycode == KEY_S || keycode == KEY_DOWN)
-		move_hero(game, ++line, col);
+		move_hero(game, ++line, col, keycode);
 	if (keycode == KEY_D || keycode == KEY_RIGHT)
-		move_hero(game, line, ++col);
+		move_hero(game, line, ++col, keycode);
 	if (keycode == KEY_Q || keycode == KEY_ESC)
 		exit_click(game);
 	return (0);
 }
 
-void	move_hero(t_game *game, int line, int col)
+void	move_hero(t_game *game, int line, int col, int keycode)
 {
 	int	x;
 	int	y;
 
+	game->map.player_side = keycode;
 	x = game->map.player.x;
 	y = game->map.player.y;
 	if (check_move(game, line, col) == TRUE)

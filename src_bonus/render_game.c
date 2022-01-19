@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:31:19 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/09 20:18:23 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/19 01:20:21 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,27 @@ void	render_exit(t_game *game, int x, int y)
 
 void	render_enemy(t_game *game, int x, int y)
 {
-	if (game->framecount % 2 == 0)
-		mlx_put_image_to_window(
-			game->vars.mlx, game->vars.win,
-			game->enemy.img, x * 30, y * 30);
+	if (game->map.player.x < x)
+	{
+		if (game->framecount % 2 == 0)
+			mlx_put_image_to_window(
+				game->vars.mlx, game->vars.win,
+				game->enemy_lu.img, x * 30, y * 30);
+		else
+			mlx_put_image_to_window(
+				game->vars.mlx, game->vars.win,
+				game->enemy_ld.img, x * 30, y * 30);
+	}
 	else
-		mlx_put_image_to_window(
-			game->vars.mlx, game->vars.win,
-			game->enemy_i.img, x * 30, y * 30);
+	{
+		if (game->framecount % 2 == 0)
+			mlx_put_image_to_window(
+				game->vars.mlx, game->vars.win,
+				game->enemy_ru.img, x * 30, y * 30);
+		else
+			mlx_put_image_to_window(
+				game->vars.mlx, game->vars.win,
+				game->enemy_rd.img, x * 30, y * 30);
+	}
 	game->framecount += 1;
 }

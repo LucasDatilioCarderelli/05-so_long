@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:41:10 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/09 20:23:26 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/19 01:09:05 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,16 @@
 # define COIN		"./assets/sprites/coins.xpm"
 # define EXIT		"./assets/sprites/exit.xpm"
 # define EXIT_OPEN	"./assets/sprites/exit_open.xpm"
+
 # define HERO_R		"./assets/sprites/knight_right.xpm"
 # define HERO_L		"./assets/sprites/knight_left.xpm"
 # define HERO_U		"./assets/sprites/knight_up.xpm"
 # define HERO_D		"./assets/sprites/knight_down.xpm"
-# define SLIME		"./assets/sprites/slime.xpm"
-# define SLIME_I	"./assets/sprites/slime_i.xpm"
+
+# define SLIME_RU	"./assets/sprites/slime_ru.xpm"
+# define SLIME_RD	"./assets/sprites/slime_rd.xpm"
+# define SLIME_LU	"./assets/sprites/slime_lu.xpm"
+# define SLIME_LD	"./assets/sprites/slime_ld.xpm"
 
 typedef enum e_bool
 {
@@ -98,13 +102,16 @@ typedef struct s_game
 	t_img		hero_left;
 	t_img		hero_up;
 	t_img		hero_down;
-	t_img		enemy;
-	t_img		enemy_i;
+	t_img		enemy_ru;
+	t_img		enemy_rd;
+	t_img		enemy_lu;
+	t_img		enemy_ld;
 }				t_game;
 
 void	init_vars(t_game *game);
 int		init_game(t_game *game);
 void	load_hero(t_game *game);
+void	load_enemy(t_game *game);
 
 void	read_map(char *argv, t_game *game);
 void	validate_map(t_game *game);
@@ -115,10 +122,10 @@ void	verify_argc(int argc);
 void	verify_ext(char *map_name);
 void	verify_wall(t_game *game);
 void	verify_count_chars(t_game *game);
-void	verify_issquare(t_game *game);
+void	verify_is_square(t_game *game);
 
 int		key_press(int keycode, t_game *game);
-void	move_hero(t_game *game, int line, int col);
+void	move_hero(t_game *game, int line, int col, int keycode);
 int		check_move(t_game *game, int line, int col);
 void	print_victory(t_game *game);
 void	print_gameover(t_game *game);

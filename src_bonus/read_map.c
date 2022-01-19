@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:39:15 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/08 14:18:20 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/18 23:34:34 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	validate_map(t_game *game)
 	}
 	verify_wall(game);
 	verify_count_chars(game);
-	verify_issquare(game);
+	verify_is_square(game);
 }
 
 void	count_chars(int x, int y, t_game *game)

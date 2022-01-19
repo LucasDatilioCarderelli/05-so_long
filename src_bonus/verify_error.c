@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   verify_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:25:49 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/06 23:13:03 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/18 23:34:25 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	verify_count_chars(t_game *game)
 	}
 }
 
-void	verify_issquare(t_game *game)
+void	verify_is_square(t_game *game)
 {
 	if (game->map.count_column == game->map.count_line)
 	{
