@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:34:46 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/19 01:21:48 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/01/20 00:51:43 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	main(int argc, char **argv)
 	init_vars(&game);
 	read_map(argv[1], &game);
 	init_game(&game);
-	mlx_hook(game.vars.win, 12, 1L << 15, render_game, &game);
+	mlx_set_font(game.vars.mlx, game.vars.win, \
+	"-sony-*-*-*-*-*-*-230-*-*-*-*-iso8859-*");
+	if (&game.count_move == 0)
+		mlx_hook(game.vars.win, 12, 1L << 15, render_game, &game);
 	mlx_hook(game.vars.win, 3, 1L << 1, key_press, &game);
 	mlx_hook(game.vars.win, 17, 0L, exit_click, &game);
 	mlx_loop(game.vars.mlx);
