@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/08 19:37:59 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/09 20:23:13 by ldatilio         ###   ########.fr       */
+/*   Created: 2021/12/08 19:37:59 by ldatilio          #+#    #+#             */
+/*   Updated: 2022/01/21 20:29:59 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,23 @@ int	ai_enemy_move(t_game *game, int x, int y)
 {
 	if (check_enemy(game->map.map[y + 1][x]) && game->map.player.y > y)
 	{
-		game->map.map[++y][x] = 'V';
-		game->map.map[y - 1][x] = '0';
+		game->map.map[y][x] = '0';
+		game->map.map[y + 1][x] = 'V';
 	}
 	else if (check_enemy(game->map.map[y][x + 1]) && game->map.player.x > x)
 	{
-		game->map.map[y][++x] = 'V';
-		game->map.map[y][x - 1] = '0';
+		game->map.map[y][x] = '0';
+		game->map.map[y][x + 1] = 'V';
 	}
 	else if (check_enemy(game->map.map[y - 1][x]) && game->map.player.y < y)
 	{
-		game->map.map[--y][x] = 'V';
-		game->map.map[y + 1][x] = '0';
+		game->map.map[y][x] = '0';
+		game->map.map[y - 1][x] = 'V';
 	}
 	else if (check_enemy(game->map.map[y][x - 1]) && game->map.player.x < x)
 	{
-		game->map.map[y][--x] = 'V';
-		game->map.map[y][x + 1] = '0';
+		game->map.map[y][x] = '0';
+		game->map.map[y][x - 1] = 'V';
 	}
 	else
 		return (0);
