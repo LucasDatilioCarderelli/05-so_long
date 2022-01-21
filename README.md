@@ -20,14 +20,10 @@
 </p>
 
 <div align="center">
-	<a alt="get next line" href="https://github.com/LucasDatilioCarderelli/so_long">
 		<img src="https://github.com/LucasDatilioCarderelli/42Cursus/blob/master/img/so_long.png">
-	</a>
+    <br><br>
+		<img src="https://github.com/LucasDatilioCarderelli/42Cursus/blob/master/img/so_long.gif">
 </div>
-
----
-
-![so_long gif](https://github.com/LucasDatilioCarderelli/42Cursus/blob/master/img/so_long.gif)
 
 ---
 
