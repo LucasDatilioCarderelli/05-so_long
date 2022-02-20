@@ -24,7 +24,7 @@
 </p>
 
 <div align="center">
-	<a href="https://github.com/LucasDatilioCarderelli/01-So_long">
+	<a href="https://github.com/LucasDatilioCarderelli/02-So_long">
 		<img src="https://github.com/LucasDatilioCarderelli/42Cursus/blob/master/img/so_long.png">
 	</a>
     <br><br>
@@ -40,7 +40,7 @@ So long is a small 2D game project, help the little hero collect all coins and e
 This is a graphic design project that will help you to improve skills in the following
 areas: ``window management``, ``event handling``, ``colours ``, ``textures``, and so ``forth``.
 
-You can see MinilibX's Documentation **[here](https://harm-smits.github.io/42docs/libs/minilibx.html)**. 
+You can see MinilibX's Documentation **[here](https://harm-smits.github.io/42docs/libs/minilibx.html)**.
 
 #### Objectives:
 * ``Unix logic``
@@ -64,7 +64,7 @@ To play the game, you can execute the executable ``so_long`` passing the map you
 ```
 
 ### Controls
-Use ``WASD`` or the ``Arrows Keys`` to move. 
+Use ``WASD`` or the ``Arrows Keys`` to move.
 
 You move one tile at a time. Enemies move after you do, and you die when you move into their tile. After picking up all Coins, the exits open and you may leave to see how many moves you’ve used.
 
